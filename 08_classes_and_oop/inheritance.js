@@ -31,4 +31,26 @@ masalaChai.logMe()
 
 console.log(chai instanceof User)
 
+// behind the scene
+function User(username){
+    this.username = username
+}
 
+User.prototype.logMe = function (){
+
+    console.log(`USERNAME IS ${this.username}`);
+}
+
+function Teacher (username, email, password){
+    User.call(this, username)
+    this.email = email
+    this.password = password
+}
+
+Teacher.prototype = Object.create(User.prototype);
+Teacher.prototype.constructor = Teacher;
+
+
+ const tea = new Teacher("tea", "tea@teacher.com", "@#269696")
+
+ tea.logMe()
